@@ -1,0 +1,113 @@
+Server Creation
+---------------
+
+1. npm init
+2. install express
+
+
+
+steps
+-----
+
+1.import express
+2.create app using express
+setting port to run the app (3000)
+
+
+
+JWT (Json web Token)- npm i jsonwebtoken
+--------------------
+
+-user authentication
+-jsonwebtoken-libary used to generate Token
+sign()-method used to generate token
+verify()-method used to token verification
+
+
+
+Token Varification
+------------------
+
+
+
+
+middlewares
+-----------
+
+-its a function  3 arguments   (req,res,next)
+-have the capacity to control http requests in node 
+-two types of middlewares
+
+       -1.Application specific middlewares - it happens before all the http methods
+       -2.router specific middlewares - can apply only to the specific request
+
+-next()-,methodused inside middleware to continue node execution
+
+
+
+MongoDB
+-------
+
+1- to see the databases
+       - show databases
+
+2- to open database   
+       - use(databaseName)    
+
+3- to list collections
+       - show collections
+
+4- to show the datas inside a collection  
+       - db.(collectionName).find()
+
+5-  to shoe a single data inside a collection
+       - db.(collectionName).findOne({key:value})
+
+       - db.users.findOne({acno:1000})       
+
+6- insert new data
+       - db.(collectionName).insertOne({keys:values})     
+
+7- to find datas using perticular condition
+       - db.(collectionName).find({condition})    
+         
+     condition create using query selection operators
+ - to access datas which have 40000 grater balance
+        - db.users.find({balance:{gt:40000}}) 
+
+8- delete a data from collection
+        - db.(collectionName).deleteOne({key:value})       - delete count = 0
+
+9- update
+        - db.(collectionName).updateOne({oldkey:oldvalue},{$set:{newkey:newvalue}})
+
+   eg: db.users.updateOne({username:anu},{$set:{username:anu v}})     
+
+
+
+
+
+
+
+ DataBase server integration  (mdb       node connection)  
+ -------------------------     27017      3000
+
+
+mongoose  - library used to integrate mongodb and server
+          - npm i mongoose
+
+
+connect() - method used to create connection string
+
+
+model()   - method used to create model
+
+
+
+steps
+-----
+1. import mongoose
+
+2.connection string creaction
+
+3.model creaction for connection (model is singular form of collection name)
