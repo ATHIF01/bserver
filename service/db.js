@@ -1,12 +1,12 @@
 const mongoose=require("mongoose")
 
 // connection string
-mongoose.connect("mongodb://localhost:27017",{useNewUrlParser:true})
+mongoose.connect("mongodb://127.0.0.1:27017/bankServer",{useNewUrlParser:true})
 
 
 
 //model
-const User=mogoose.model("User",
+const User=mongoose.model("User",
 {
     username:String,
     acno:Number,

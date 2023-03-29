@@ -1,6 +1,6 @@
 const jwt=require("jsonwebtoken")
 
-
+const db=require('./db')
 
 
  userDetails= {
@@ -13,30 +13,80 @@ const jwt=require("jsonwebtoken")
 
 
 register =(acno, uname, psw)=>{
- 
-    if (acno in userDetails) {
-      return {
-        status:false,
-        message:"user already present",
-        statusCode:404
-      }
+                         // store the resolved output of findOne in a variable user
+return db.User.findOne({acno}).then(user=>{
+//if acno present in db then get the object of that user else null response
+  if(user){
+    return {
+      status:false,
+      message:"user already present",
+      statusCode:404
     }
-    else {
-      userDetails[acno] = { username: uname, acno, password: psw, balance: 0, transactions:[] }
-    
-      return {
-        
-          status:true,
-          message:"registration successfull",
-          statusCode:200
-        
-      }
-    }
-
+   
   }
+  else{
+     newUser=new db.User({
+      username:uname,
+      acno,
+      password:psw,
+      balance:0,
+      transactions:[]
+     }) 
+     newUser.save()
+     return {
+        
+      status:true,
+      message:"registration successfull",
+      statusCode:200
+    
+  }
+  }
+})
 
+} 
+   
 
   login=(acno, psw)=>{
+
+    return db.User.findOne({acno}).then(user=>{
+
+      if(user){
+        if(psw == user.password){
+          return {
+        
+            status:true,
+            message:"login successfull",
+            statusCode:200,
+            // currentUser,
+            // currentAcno,
+            // token
+          
+        }
+
+        }
+        else{
+          return {
+        
+            status:false,
+            message:"incurrect password",
+            statusCode:404
+          
+        }
+        }
+      }
+      else{
+
+        return {
+        
+          status:false,
+          message:"not registerd",
+          statusCode:404
+        
+      }
+      }
+      
+    })
+
     if (acno in userDetails) {
       if (psw == userDetails[acno]["password"]) {
         currentUser = userDetails[acno]["username"]

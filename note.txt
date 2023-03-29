@@ -111,3 +111,12 @@ steps
 2.connection string creaction
 
 3.model creaction for connection (model is singular form of collection name)
+
+
+
+
+Asynchronus Method Handling In Js
+---------------------------------
+
+promise  -  resolve     then()
+         -  reject      catch()
